@@ -1,0 +1,362 @@
+package GUI.views;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JToolBar;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.ImageIcon;
+import java.awt.Canvas;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
+import javax.swing.JSplitPane;
+import javax.swing.JDesktopPane;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.JFormattedTextField;
+import javax.swing.JButton;
+import javax.swing.JSlider;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
+import javax.swing.JTree;
+import java.awt.ScrollPane;
+import javax.swing.JList;
+import java.awt.Toolkit;
+import GUI.views.MulticastChat;
+import java.net.InetAddress;
+import GUI.views.Log_In;
+
+public class Video_Conference extends JFrame {
+
+  private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+                                        InetAddress group;
+                                        group = InetAddress.getByName("224.0.0.1");
+                                         int port = 1234;
+    
+                                        MulticastChat chat = new MulticastChat (group, port);
+                                        chat.start ();
+                                        
+					Video_Conference frame = new Video_Conference(toString(), toString());
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	/**
+	 * Create the frame.
+	 */
+	public Video_Conference(String conf_name, String conf_info) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Video_Conference.class.getResource("/GUI/resources/Logo.png")));
+		setTitle("Video Coference");
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setBounds(100, 100, 1309, 701);
+                final String Name = Log_In.getUserName();
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mnFile = new JMenu("File");
+		mnFile.setIcon(null);
+		menuBar.add(mnFile);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Close");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int action = JOptionPane.showConfirmDialog(Video_Conference.this,
+						"Do you really want to exit the application?",
+						"Confirm Exit", JOptionPane.OK_CANCEL_OPTION);
+				if (action == JOptionPane.OK_OPTION) {
+					System.exit(0);
+				}
+			}
+		});
+		mntmNewMenuItem.setIcon(new ImageIcon(Video_Conference.class.getResource("/GUI/resources/Close_16x16.png")));
+		mnFile.add(mntmNewMenuItem);
+		
+		JMenu mnAbout = new JMenu("About");
+		menuBar.add(mnAbout);
+		
+		JMenuItem mntmAbout = new JMenuItem("About");
+		mntmAbout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(Video_Conference.this, "Rave Alpha v1.0");
+			}
+		});
+		mntmAbout.setIcon(new ImageIcon(Video_Conference.class.getResource("/GUI/resources/question_16x16.png")));
+		mnAbout.add(mntmAbout);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(220, 220, 220));
+		panel.setBorder(new LineBorder(Color.GREEN, 2));
+		
+		//JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBorder(new LineBorder(new Color(0, 0, 0), 4, true));
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBorder(new LineBorder(new Color(0, 0, 0), 4, true));
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBorder(new LineBorder(new Color(0, 0, 0), 4, true));
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBorder(new LineBorder(new Color(0, 0, 0), 4, true));
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setBorder(new LineBorder(new Color(0, 0, 0), 4, true));
+		
+		JPanel panel_6 = new JPanel();
+		panel_6.setBorder(new LineBorder(new Color(0, 0, 0), 4, true));
+		
+		final JFormattedTextField formattedTextField = new JFormattedTextField();
+		
+		JButton btnNewButton = new JButton("Send");
+
+		JPanel panel_7 = new JPanel();
+		panel_7.setBorder(new LineBorder(new Color(0, 0, 0), 3, true));
+		
+		JButton btnNewButton_1 = new JButton("END");
+		btnNewButton_1.setForeground(Color.RED);
+		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnNewButton_1.setIcon(new ImageIcon(Video_Conference.class.getResource("/GUI/resources/Close_16x16.png")));
+		
+		JButton btnHold = new JButton("|| Hold");
+		btnHold.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnHold.setForeground(new Color(255, 255, 0));
+		
+		JButton btnShareScreen = new JButton("SHARE SCREEN");
+		btnShareScreen.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		
+		JSlider slider = new JSlider();
+		
+		JSlider slider_1 = new JSlider();
+		
+		JPanel panel_8 = new JPanel();
+		panel_8.setBorder(new LineBorder(new Color(0, 0, 0), 4, true));
+		
+		Canvas canvas = new Canvas();
+		panel_8.add(canvas);
+		
+		JButton btnGoLive = new JButton("GO LIVE");
+		btnGoLive.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnGoLive.setForeground(new Color(0, 204, 102));
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(Video_Conference.class.getResource("/GUI/resources/mic-1_16x16.png")));
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(Video_Conference.class.getResource("/GUI/resources/volume3_2_16x16.png")));
+		
+                final JTextArea textArea2 = new JTextArea();
+                
+                btnNewButton.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent arg0) {
+                            String Message1 = formattedTextField.getText();
+                            String output = MulticastChat.appendText(Name, Message1);
+                            textArea2.append(output);
+			}
+		});
+
+		JList list = new JList();
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 1271, Short.MAX_VALUE)
+						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(panel_6, GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
+								.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE))
+							.addGap(31)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+								.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
+							.addGap(31)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+								.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE))
+							.addGap(18)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(formattedTextField, GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE))
+								.addComponent(textArea2, GroupLayout.PREFERRED_SIZE, 551, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+							.addGap(75)
+							.addComponent(panel_7, GroupLayout.PREFERRED_SIZE, 428, GroupLayout.PREFERRED_SIZE)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(18)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+										.addComponent(btnGoLive, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE))
+									.addGap(14)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+										.addComponent(btnHold, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+										.addComponent(btnShareScreen, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE))
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+										.addComponent(label, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(lblNewLabel_1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+										.addComponent(slider_1, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
+										.addComponent(slider, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(58)
+									.addComponent(panel_8, GroupLayout.PREFERRED_SIZE, 285, GroupLayout.PREFERRED_SIZE)))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(list, GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)))
+					.addGap(12))
+		);
+		gl_contentPane.setVerticalGroup(
+			gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(list, GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(panel_7, GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+							.addGap(33))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(panel_8, GroupLayout.PREFERRED_SIZE, 156, GroupLayout.PREFERRED_SIZE)
+							.addGap(20)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+									.addComponent(btnGoLive, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
+									.addComponent(btnHold, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE))
+								.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+								.addComponent(slider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addGap(18)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE)
+								.addComponent(label, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+								.addComponent(slider_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnShareScreen, GroupLayout.PREFERRED_SIZE, 44, GroupLayout.PREFERRED_SIZE))
+							.addGap(18)))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE))
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addComponent(panel_6, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
+								.addGap(14)
+								.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE))
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addComponent(textArea2, GroupLayout.PREFERRED_SIZE, 221, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+									.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(formattedTextField, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
+							.addGap(14)
+							.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap())
+		);
+		
+		Canvas canvas_7 = new Canvas();
+		panel_2.add(canvas_7);
+		
+		Canvas canvas_6 = new Canvas();
+		panel_4.add(canvas_6);
+		
+		Canvas canvas_5 = new Canvas();
+		panel_5.add(canvas_5);
+		
+		Canvas canvas_4 = new Canvas();
+		panel_1.add(canvas_4);
+		
+		Canvas canvas_3 = new Canvas();
+		panel_3.add(canvas_3);
+		
+		Canvas canvas_2 = new Canvas();
+		panel_7.add(canvas_2);
+		
+		Canvas canvas_1 = new Canvas();
+		panel_6.add(canvas_1);
+		
+		//JTextArea textArea = new JTextArea();
+		//tabbedPane.addTab("Conference", null, textArea, null);
+		
+		JTextArea textArea_1 = new JTextArea();
+		//tabbedPane.addTab("Friends", null, textArea_1, null);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(Video_Conference.class.getResource("/GUI/resources/Logo2_small.png")));
+		
+		JLabel lblNewLabel_2 = new JLabel("Conference Title");
+		lblNewLabel_2.setText("Conference Title: "+ conf_name);
+		
+		JLabel label_1 = new JLabel("Conference Title");
+		label_1.setText("Conference Information: "+ conf_info);
+		
+		JLabel label_2 = new JLabel("New label");
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(lblNewLabel_2)
+							.addGap(485)
+							.addComponent(label_2))
+						.addComponent(label_1))
+					.addPreferredGap(ComponentPlacement.RELATED, 467, Short.MAX_VALUE)
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE))
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(6)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblNewLabel_2)
+								.addComponent(label_2))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(label_1)))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		panel.setLayout(gl_panel);
+		contentPane.setLayout(gl_contentPane);
+	}
+}
